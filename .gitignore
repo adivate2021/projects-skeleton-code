@@ -6,5 +6,6 @@ test_tfrecords
 train_frunctions
 train_images
 train_tfrecords
+.DS_Store
 
 training_summaries

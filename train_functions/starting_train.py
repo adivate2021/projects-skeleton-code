@@ -6,7 +6,6 @@ from tqdm import tqdm
 
 def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
     """
-    Trains and evaluates a model.
 
     Args:
         train_dataset:   PyTorch dataset containing training data.
