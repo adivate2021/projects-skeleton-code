@@ -26,9 +26,11 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
         val_dataset, batch_size=batch_size, shuffle=True
     )
 
+
     # Initalize optimizer (for gradient descent) and loss function
     optimizer = optim.Adam(model.parameters())
     loss_fn = nn.CrossEntropyLoss()
+
 
     step = 0
     for epoch in range(epochs):
@@ -36,14 +38,23 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
 
         # Loop over each batch in the dataset
         for batch in tqdm(train_loader):
+            print(type(batch)) #testing step to see batch type
+            print("--------------------------------------------------") #separate
+            images, labels = batch
+            outputs = model(images)
             # TODO: Backpropagation and gradient descent
+            loss = loss_fn(outputs, labels)
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
+            print('Epoch:', epoch, 'Loss:', loss.item())
 
             # Periodically evaluate our model + log to Tensorboard
             if step % n_eval == 0:
                 # TODO:
                 # Compute training loss and accuracy.
                 # Log the results to Tensorboard.
-
+                compute_accuracy(outputs, labels)
                 # TODO:
                 # Compute validation loss and accuracy.
                 # Log the results to Tensorboard.
