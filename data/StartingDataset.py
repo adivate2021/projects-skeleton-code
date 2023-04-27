@@ -1,10 +1,6 @@
 import torch
 import pandas as pd
 
-wow = pd.read_csv("train.csv")
-print(wow)
-print(wow.groupby(["label"]).count())
-
 class StartingDataset(torch.utils.data.Dataset):
     """
     Dataset that contains 100000 3x224x224 black images (all zeros).
