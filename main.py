@@ -11,14 +11,14 @@ def main():
     hyperparameters = {"epochs": constants.EPOCHS, "batch_size": constants.BATCH_SIZE}
 
     # TODO: Add GPU support. This line of code might be helpful.
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     print("Epochs:", constants.EPOCHS)
     print("Batch size:", constants.BATCH_SIZE)
 
     # Initalize dataset and model. Then train the model!
-    train_dataset = StartingDataset(True)
-    val_dataset = StartingDataset(False)
+    train_dataset = StartingDataset("../../Downloads/cassava-leaf-disease-classification/train_images", "../../Downloads/cassava-leaf-disease-classification/train.csv", True)
+    val_dataset = StartingDataset("../../Downloads/cassava-leaf-disease-classification/train_images", "../../Downloads/cassava-leaf-disease-classification/train.csv", False)
     model = StartingNetwork()
     starting_train(
         train_dataset=train_dataset,
