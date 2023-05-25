@@ -90,7 +90,6 @@ def evaluate(val_loader, model, loss_fn):
     """
     Computes the loss and accuracy of a model on the validation dataset.
 
-    TODO!
     
     for the loss function, the detailed implementation isn't important,
     just make it consistent throughout the training. Just want the loss

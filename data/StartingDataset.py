@@ -14,23 +14,26 @@ class StartingDataset(torch.utils.data.Dataset):
     """
 
     def __init__(self):
-        data_csv = pd.read_csv("/cassava-leaf-disease-classification/train.csv")
+        path = "/cassava-leaf-disease-classification/train.csv"
+        data_csv = pd.read_csv(path)
         
         self.image_ids = data_csv["image_id"]
+        
         self.labels = data_csv["label"]
+
 
 
 
     def __getitem__(self, index):
         path_image = "~/Desktop/cassava-leaf-disease-classification/train_images" #path to the training image folder
 
-        image_id = self.image_ids[index]
-        label = self.labels[index]
+        image_id = self.image_ids.iloc[index]
+        label = torch.Tensor(int(self.labels.iloc[index]))
         both = (image_id, label)
         image = cv2.imread(os.path.join(path_image, image_id))
-        image_array = torch.Tensor(image)
-
+        #image_array = torch.Tensor(image)
+        image_array = (transforms.toTensor()(image),label)
         return image_array
 
     def __len__(self):
-        return len(self.image_ids)
+        return len(self.labels)
