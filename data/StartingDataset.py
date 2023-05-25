@@ -9,16 +9,22 @@ class StartingDataset(torch.utils.data.Dataset):
     Dataset that contains 100000 3x224x224 black images (all zeros).
     """
 
-    def __init__(self):
+    def __init__(self, training_bool):
         data_csv = pd.read_csv("/cassava-leaf-disease-classification/train.csv")
         
         self.image_ids = data_csv["image_id"]
         self.labels = data_csv["label"]
+        if training_bool:
+            self.image_id = self.image_id[:17118]
+            self.labels = self.labels[:17118]
+        else:
+            self.image_id = self.image_id[17118:]
+            self.labels = self.labels[17118:]
 
 
 
     def __getitem__(self, index):
-        path_image = "~/Desktop/cassava-leaf-disease-classification/train_images" #path to the training image folder
+        path_image = "~/Downloads/cassava-leaf-disease-classification/train_images" #path to the training image folder, change to whatever
 
         image_id = self.image_ids[index]
         label = self.labels[index]
